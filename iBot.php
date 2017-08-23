@@ -1,99 +1,122 @@
 <?php
 /**
-*Plugin Name: iBot
-*Description: Creating my first plugin in Wordpress
-* Author: OscarHMG
+* Plugin Name: iBot
+* Plugin URI: http://www.interlancompu.com/
+* Description: Customizable chatbot plugin for Wordpress platform powered by Interlancompu 
+* Author: Oscar Moncayo
 * Author URI: https://github.com/OscarHMG
 * Version: 1.0
-* Text Domain: my-ibot
 **/
 
-/*
-* Function to add the plugin in the Dashboard admin menu
+
+
+//Exit, if you directly access this PATH
+if (!defined( 'ABSPATH')) 
+    exit;
+
+if(! class_exists('iBot')):
+
+
+/**
+* iBot Main Class
 */
-function iBot_plugin_attach_menu_dashboard(){
-    init();
-	add_menu_page('iBot - Chat bot', 	//Title of the page 
-		'iBot', 						//Dashboard Menu Title
-		'administrator', 				//Rol access
-		'ibot_settings_content',		//Id for the settings page
-		'ibot_settings_HTML_Content',	//Function that allow to create the content
-		'dashicons-admin-generic'		//Icon Menu
-	);
+final class iBot{
+
+    //Singleton pattern
+    private static $instance;
+    public $api;
+
+    /**
+    * Instansce of iBot.
+    * This function allow to create only one instance in memory. Also, define globals. -- Pending :support multilanguages. --
+    */
+    public static function instance(){
+        //
+        if(! isset(self::$instance) && !(self::$instance instanceof iBot)){
+            self::$instance = new iBot;
+
+            //Load the constants needed
+            self::$instance->setupConstants();
+            self::$instance->includeFiles();
+            //self::$instance->api = new iBotAPI();
+        }
+        return self::$instance;
+
+    }
+
+
+    
+    /**
+    * Function to forbid cloning instances of the iBot class.
+    */
+    /*
+    public function __clone(){
+        _doing_it_wrong(__FUNCTION__, __('Nope, forbidden', 'my-iBot'),1.0);
+    }
+
+    /**
+     *Disable unserializing iBot objects(Forbidden)
+     */
+    /*
+    public function __wakeup(){
+        _doing_it_wrong( __FUNCTION__, __('Nope, forbidden', 'my-iBot'), 1.0 );
+    }/*
+
+
+    /**
+     * Setup the constants to the iBot plugin.
+     */
+    private function setupConstants(){
+        //Define plugin version.
+        if(!defined('IBOT_VERSION'))
+            define('IBOT_VERSION', 1.0);
+
+        //Plugin folder path
+        if(!defined('IBOT_PLUGIN_DIRECTORY'))
+            define('IBOT_PLUGIN_DIRECTORY', plugin_dir_path(__FILE__));
+
+        //Plugin folder URL
+        if(!defined('IBOT_PLUGIN_URL'))
+            define('IBOT_PLUGIN_URL', plugin_dir_url(__FILE__));
+
+        //Plugin root file
+        if(!defined('IBOT_PLUGIN_FILE'))
+            define('IBOT_PLUGIN_FILE', __FILE__);
+    }
+
+    /**
+     * Function to include the required files.
+     *
+     */
+    private function includeFiles(){
+        global $iBot_global_Opt;
+        if ( is_admin() ) {
+            require_once IBOT_PLUGIN_DIRECTORY . 'includes/admin/admin-pages.php';
+            require_once IBOT_PLUGIN_DIRECTORY . 'includes/admin/settings/display-settings.php';
+            require_once IBOT_PLUGIN_DIRECTORY . 'includes/admin/welcome.php';
+        }
+        require_once IBOT_PLUGIN_DIRECTORY . 'includes/install.php';
+        //Here include JS and CSS
+        require_once IBOT_PLUGIN_DIRECTORY . 'includes/scripts.php';
+ 
+    }
 
 }
-//Allow to attach the 'iBot' option in the Admin menu
-add_action('admin_menu','iBot_plugin_attach_menu_dashboard');
+endif; //End definition of the Class 'iBot'
 
 
-/*
-* Function to create the HTML content for the settings page
-*/
-function ibot_settings_HTML_Content(){
-?>
-    <div class="wrap">
-        <h2>Configuration: Save number</h2>
-        <br>
-        <form method="POST" action="options.php">
-            <?php 
-                settings_fields('iBot-content-settings-group');
-                do_settings_sections( 'iBot-content-settings-group' ); 
-            ?>
-            <label>Token API.AI:&nbsp;</label>
-            <input  type="text" 
-                    name="maxValue" 
-                    id="maxValue" 
-                    value="<?php echo get_option('maxValue'); ?>" />
-
-            <label>Field 2:&nbsp;</label>
-            <input  type="text" 
-                    name="field1" 
-                    id="field1" 
-                    value="<?php echo get_option('field1'); ?>" />
-
-            <label>Field 3:&nbsp;</label>
-            <input  type="text" 
-                    name="field2" 
-                    id="field2" 
-                    value="<?php echo get_option('field2'); ?>" />
-
-            <?php submit_button(); ?>
-        </form>
-    </div>
-<?php
+/**
+ * Return the global instance iBot ()
+ */
+function iBotAPI(){
+    return iBot::instance();
 }
 
-/*
-* Funtion to register the configurable options in the form to save them
-*/
-function iBot_content_settings(){
-    $array = array();
 
-    //Save the maxValueField, field1, field2 in the DB (Wp-Options table)
-    register_setting('iBot-content-settings-group',
-                     'maxValue',
-                     'intval');
-    register_setting('iBot-content-settings-group',
-                     'field1',
-                     'intval');
-    register_setting('iBot-content-settings-group',
-                     'field2',
-                     'intval');
+//Runn the iBot instance
+iBotAPI();
 
 
 
-}
-add_action('admin_init','iBot_content_settings');
 
-
-function init(){
-    //wp_register_style( 'namespace', '/mycss.css' );
-
-    //wp_register_script ( 'mysample', plugins_url ( 'js/myjs.js', __FILE__ ) );
-    wp_register_style ( 'settings-stylesheet', plugins_url ( 'css/style_settings.css', __FILE__ ) );
-    wp_enqueue_style('settings-stylesheet');
-
-
-
-}
 

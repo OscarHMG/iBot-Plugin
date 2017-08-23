@@ -1,0 +1,7 @@
+
+<?php
+/**
+ * Welcome plugin information
+ */
+
+?>
