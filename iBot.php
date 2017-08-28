@@ -98,6 +98,8 @@ final class iBot{
         require_once IBOT_PLUGIN_DIRECTORY . 'includes/install.php';
         //Here include JS and CSS
         require_once IBOT_PLUGIN_DIRECTORY . 'includes/scripts.php';
+        //require_once IBOT_PLUGIN_DIRECTORY . 'includes/templates/iBot_UI.php';
+
  
     }
 

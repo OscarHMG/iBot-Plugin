@@ -9,9 +9,33 @@
 /**
 * Funtion to load CSS of "iBot" (admin page) 
 **/
+
+function loadHTMLiBot(){
+	?>
+	<img id="img-circle" src="wp-content/plugins/iBot/assets/images/robot.png"/>
+
+
+	<?php
+
+}
+
 function loadAdminCSS(){
-		wp_register_style( 'admin-page-style', IBOT_PLUGIN_URL.'assets/css/'.'admin_style.css', array(), 1.0, 'all');
-		wp_enqueue_style('admin-page-style');
+	wp_register_style( 'admin-page-style', IBOT_PLUGIN_URL.'assets/css/'.'admin_style.css', array(), 1.0, 'all');
+	wp_enqueue_style('admin-page-style');
+	wp_enqueue_style('iBot-style');
+
+}
+
+function loadCSSiBot(){
+	wp_register_style( 'iBot-style', IBOT_PLUGIN_URL.'assets/css/'.'ibot_style.css', array(), 1.0, 'all');
+	wp_enqueue_style('iBot-style');
+
+
+}
+
+function loadJSFrontEnd(){
+	wp_register_script( 'frontEnd-Script', IBOT_PLUGIN_URL.'assets/js/'.'frontEnd.js', array( 'jquery' ), 1.0 );
+	wp_enqueue_script( 'frontEnd-Script' );
 }
 
 
@@ -27,6 +51,11 @@ function loadFontAwesome(){
 
 
 add_action( 'admin_enqueue_scripts', 'loadAdminCSS' );
+add_action( 'wp_enqueue_scripts', 'loadHTMLiBot' );
+
+add_action('wp_enqueue_scripts', 'loadCSSiBot');
+add_action('wp_enqueue_scripts', 'loadJSFrontEnd');
+
 add_action( 'wp_enqueue_scripts', 'loadFontAwesome' );
 
 ?>
