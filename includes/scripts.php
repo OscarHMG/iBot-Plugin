@@ -12,8 +12,17 @@
 
 function loadHTMLiBot(){
 	?>
-	<img id="img-circle" src="wp-content/plugins/iBot/assets/images/robot.png"/>
-
+	<img id="img-circle" src=<?php echo IBOT_PLUGIN_URL. "assets/images/robot.png" ?> data-toggle="tooltip" data-animation="true" data-placement="top" title="¿Necesitas ayuda?" />
+	<div id="chatContent"></div>
+	<script>
+       function initChat(){
+            var chat = new iCharBot(document.getElementById('chatContent'));
+            initParamsChat("img-circle");
+            sendMsgApi('hola');
+            setTimeout(function(){document.getElementById('mainContainerBot').style.display='block'},2000);
+            jQuery('#img-circle').fadeIn(2000);
+       }
+	</script>
 
 	<?php
 
@@ -48,6 +57,19 @@ function loadFontAwesome(){
 }
 
 
+function loadBootstrapJS(){
+	wp_register_script("bootstrap-js", 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
+	wp_enqueue_script("bootstrap-js");
+
+}
+
+function loadJS_iBot(){
+	wp_register_script("iBot-js", 'http://10.10.30.82:8080/api/js.php?key=AAA&callback=initChat');
+	wp_enqueue_script("iBot-js");
+
+}
+
+
 
 
 add_action( 'admin_enqueue_scripts', 'loadAdminCSS' );
@@ -55,7 +77,9 @@ add_action( 'wp_enqueue_scripts', 'loadHTMLiBot' );
 
 add_action('wp_enqueue_scripts', 'loadCSSiBot');
 add_action('wp_enqueue_scripts', 'loadJSFrontEnd');
-
+//Load fontAwesome, Bootstrap, script 
 add_action( 'wp_enqueue_scripts', 'loadFontAwesome' );
+add_action('wp_enqueue_scripts', 'loadBootstrapJS');
+add_action('wp_enqueue_scripts','loadJS_iBot' );
 
 ?>
