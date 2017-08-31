@@ -7,21 +7,32 @@
 
 
 /**
-* Funtion to load CSS of "iBot" (admin page) 
+* Function to load CSS of "iBot" (admin page) 
 **/
 
 function loadHTMLiBot(){
 	?>
-	<img id="img-circle" src=<?php echo IBOT_PLUGIN_URL. "assets/images/robot.png" ?> data-toggle="tooltip" data-animation="true" data-placement="top" title="¿Necesitas ayuda?" />
+	<img id="img-circle" src=<?php echo IBOT_PLUGIN_URL. "assets/images/robot.png" ?> />
 	<div id="chatContent"></div>
-	<script>
-       function initChat(){
+	<script type="text/javascript">
+	
+
+        function initChat(){
+            //Append JS content to the 'chatContent' div
+            //var body = document.getElementsByTagName("body")[0]; // body element
+            //var chatContent = document.createElement("div");
+            //chatContent.setAttribute("id","chatContent");
+
             var chat = new iCharBot(document.getElementById('chatContent'));
             initParamsChat("img-circle");
-            sendMsgApi('hola');
+            sendRequest('hola',0);
             setTimeout(function(){document.getElementById('mainContainerBot').style.display='block'},2000);
             jQuery('#img-circle').fadeIn(2000);
-       }
+        }
+
+
+
+		
 	</script>
 
 	<?php
@@ -64,7 +75,9 @@ function loadBootstrapJS(){
 }
 
 function loadJS_iBot(){
-	wp_register_script("iBot-js", 'http://10.10.30.82:8080/api/js.php?key=AAA&callback=initChat');
+	$token = get_option('maxValue');
+	$url = "http://10.10.30.82:8080/api/js.php?key=".$token."&callback=initChat";
+	wp_register_script("iBot-js", $url);
 	wp_enqueue_script("iBot-js");
 
 }

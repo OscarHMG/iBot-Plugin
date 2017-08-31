@@ -13,18 +13,9 @@
     display: none;
 }
 
-/*.tooltip{
-    margin-right:5px;
-    padding:8px;
-    border:1px solid blue;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    position: absolute;
-    z-index: 10999;
-    border: 20px solid transparent;
-    border-bottom: 0;
-    border-left: 0;
-  }*/
+.tooltip{
+  font-size: 15px;
+}
 
 #img-circle{
   cursor:pointer;
