@@ -16,19 +16,33 @@ function loadHTMLiBot(){
 	<div id="chatContent"></div>
 	<script type="text/javascript">
 	
+		
+    		//your code to run since DOM is loaded and ready
 
         function initChat(){
             //Append JS content to the 'chatContent' div
             //var body = document.getElementsByTagName("body")[0]; // body element
-            //var chatContent = document.createElement("div");
-            //chatContent.setAttribute("id","chatContent");
+            //document.body.innerHTML += '<div id="chatContent"></div>';
+            /*document.addEventListener("DOMContentLoaded", function(event) { 
+            var chatContent = document.createElement("div");
+            chatContent.setAttribute("id","chatContent");
+            document.getElementsByTagName('body')[0].appendChild(chatContent);
+
 
             var chat = new iCharBot(document.getElementById('chatContent'));
             initParamsChat("img-circle");
             sendRequest('hola',0);
             setTimeout(function(){document.getElementById('mainContainerBot').style.display='block'},2000);
             jQuery('#img-circle').fadeIn(2000);
+            });*/
+            var chat = new iCharBot(document.getElementById('chatContent'));
+            initParamsChat("img-circle");
+            sendRequest('hola',0);
+            setTimeout(function(){document.getElementById('mainContainerBot').style.display='block'},2000);
+            jQuery('#img-circle').fadeIn(2000);
         }
+		
+
 
 
 
