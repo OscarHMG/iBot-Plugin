@@ -37,7 +37,7 @@ function loadHTMLiBot(){
             });*/
             var chat = new iCharBot(document.getElementById('chatContent'));
             initParamsChat("img-circle");
-            sendRequest('hola',0);
+            sendRequest('59b1b13db2df1',0); //LOGIN- REGISTRO UUID
             setTimeout(function(){document.getElementById('mainContainerBot').style.display='block'},2000);
             jQuery('#img-circle').fadeIn(2000);
         }
@@ -90,7 +90,9 @@ function loadBootstrapJS(){
 
 function loadJS_iBot(){
 	$token = get_option('maxValue');
-	$url = "http://10.10.30.82:8080/api/js.php?key=".$token."&callback=initChat";
+	$url = "http://54.152.11.253:8081/api/js.php?key=".$token."&callback=initChat";
+
+	//$url = "http://10.10.30.82:8080/api/js.php?key=".$token."&callback=initChat";
 	wp_register_script("iBot-js", $url);
 	wp_enqueue_script("iBot-js");
 
