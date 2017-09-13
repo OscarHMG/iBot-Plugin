@@ -25,3 +25,11 @@
 #chatContent{
   position: relative;
 }
+
+.tooltip-inner{
+    float: right;
+    position: absolute;
+    right: 5px;
+    top: -10px;
+}
+
