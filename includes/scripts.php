@@ -90,8 +90,9 @@ function loadBootstrapJS(){
 
 function loadJS_iBot(){
 	$token = get_option('maxValue');
-	$url = "http://54.152.11.253:8081/api/js.php?key=".$token."&callback=initChat";
+	//$url = "http://54.152.11.253:8081/api/js.php?key=".$token."&callback=initChat";
 	//$url = "http://10.10.30.82:8080/api/js.php?key=".$token."&callback=initChat";
+	$url = "https://chatbot.interlancompu.com/api/js.php?key=".$token."&callback=initChat";
 	wp_register_script("iBot-js", $url);
 	wp_enqueue_script("iBot-js");
 }
