@@ -11,6 +11,7 @@
     z-index:10000;
     bottom:27px;
     right:64px;
+    transition: right 1s;
 }
 
 .tooltip{
