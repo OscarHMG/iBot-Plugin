@@ -108,6 +108,6 @@ add_action('wp_enqueue_scripts', 'loadJSFrontEnd');
 //Load fontAwesome, Bootstrap, script 
 add_action( 'wp_enqueue_scripts', 'loadFontAwesome' );
 add_action('wp_enqueue_scripts', 'loadBootstrapJS');
-add_action('wp_enqueue_scripts','loadJS_iBot' );
+add_action('wp_enqueue_scripts','loadJS_iBot');
 
 ?>
