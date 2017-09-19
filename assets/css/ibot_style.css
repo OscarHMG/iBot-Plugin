@@ -9,8 +9,8 @@
     border-color: black;
     display: none;
     z-index:10000;
-    bottom:27px
-    right:64px
+    bottom:27px;
+    right:64px;
 }
 
 .tooltip{
