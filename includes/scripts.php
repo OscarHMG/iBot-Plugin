@@ -18,32 +18,7 @@ function loadHTMLiBot(){
         function initChat(){
             var chat = new iCharBot(document.getElementById('chatContent'));
             initParamsChat("img-circle");
-            onLoad(function(){
-            	console.log('I am waiting for the page to be loaded');
-            },
-				function(){
-					console.log('The page is loaded');
-				    sendRequest('59b1b13db2df1',0); //LOGIN - REGISTRO UUID
-            		setTimeout(function(){
-	            		document.getElementById('mainContainerBot').style.display='block'},0);
-	            		jQuery('#img-circle').fadeIn(2000);
-	            		jQuery('#img-circle').popover({title: "", content: "¿Necesitas ayuda?", animation: true, placement:"left", trigger:"hover"});
-	    				jQuery("#img-circle").popover("show");
-				});
         }
-		
-		function onLoad(loading, loaded) {
-		    if(document.readyState === 'complete'){
-		        return loaded();
-		    }
-		    loading();
-		    if (window.addEventListener) {
-		        window.addEventListener('load', loaded, false);
-		    }
-		    else if (window.attachEvent) {
-		        window.attachEvent('onload', loaded);
-		    }
-		};
 	</script>
 	<?php
 
