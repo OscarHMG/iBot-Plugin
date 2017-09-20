@@ -6,8 +6,8 @@
 jQuery(document).ready(function() {
 
     //Show tooltip, when page is loaded.
-    jQuery('#img-circle').tooltip({title: "¿Necesitas ayuda?", animation: true, placement:"left"});
-    jQuery("#img-circle").tooltip("show");
+    /*jQuery('#img-circle').tooltip({title: "¿Necesitas ayuda?", animation: true, placement:"left"});
+    jQuery("#img-circle").tooltip("show");*/
 	
 
 });

@@ -15,40 +15,36 @@ function loadHTMLiBot(){
 	<img id="img-circle" src=<?php echo IBOT_PLUGIN_URL. "assets/images/robot.png" ?> />
 	<div id="chatContent"></div>
 	<script type="text/javascript">
-	
-		
-    		//your code to run since DOM is loaded and ready
-
         function initChat(){
-            //Append JS content to the 'chatContent' div
-            //var body = document.getElementsByTagName("body")[0]; // body element
-            //document.body.innerHTML += '<div id="chatContent"></div>';
-            /*document.addEventListener("DOMContentLoaded", function(event) { 
-            var chatContent = document.createElement("div");
-            chatContent.setAttribute("id","chatContent");
-            document.getElementsByTagName('body')[0].appendChild(chatContent);
-
-
             var chat = new iCharBot(document.getElementById('chatContent'));
             initParamsChat("img-circle");
-            sendRequest('hola',0);
-            setTimeout(function(){document.getElementById('mainContainerBot').style.display='block'},2000);
-            jQuery('#img-circle').fadeIn(2000);
-            });*/
-            var chat = new iCharBot(document.getElementById('chatContent'));
-            initParamsChat("img-circle");
-            sendRequest('59b1b13db2df1',0); //LOGIN- REGISTRO UUID
-            setTimeout(function(){document.getElementById('mainContainerBot').style.display='block'},2000);
-            jQuery('#img-circle').fadeIn(2000);
+            onLoad(function(){
+            	console.log('I am waiting for the page to be loaded');
+            },
+				function(){
+					console.log('The page is loaded');
+				    sendRequest('59b1b13db2df1',0); //LOGIN - REGISTRO UUID
+            		setTimeout(function(){
+	            		document.getElementById('mainContainerBot').style.display='block'},0);
+	            		jQuery('#img-circle').fadeIn(2000);
+	            		jQuery('#img-circle').popover({title: "", content: "¿Necesitas ayuda?", animation: true, placement:"left", trigger:"hover"});
+	    				jQuery("#img-circle").popover("show");
+				});
         }
 		
-
-
-
-
-		
+		function onLoad(loading, loaded) {
+		    if(document.readyState === 'complete'){
+		        return loaded();
+		    }
+		    loading();
+		    if (window.addEventListener) {
+		        window.addEventListener('load', loaded, false);
+		    }
+		    else if (window.attachEvent) {
+		        window.attachEvent('onload', loaded);
+		    }
+		};
 	</script>
-
 	<?php
 
 }
